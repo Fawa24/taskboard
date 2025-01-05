@@ -16,7 +16,6 @@ return <div>
     border: '2px solid #ccc',
     borderRadius: '12px',
     padding: '15px',
-    width: '250px',
     fontFamily: 'Arial, sans-serif' 
   }}>
     <div style={{ 
