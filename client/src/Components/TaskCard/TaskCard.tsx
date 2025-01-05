@@ -15,8 +15,7 @@ return <div>
 <div style={{
     border: '2px solid #ccc',
     borderRadius: '12px',
-    padding: '15px',
-    fontFamily: 'Arial, sans-serif' 
+    padding: '15px'
   }}>
     <div style={{ 
       fontWeight: 'bold',
