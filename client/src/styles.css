@@ -16,11 +16,14 @@
 
 .modal-content {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: white;
   padding: 20px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   width: 80%;
+  height: 40%;
   max-width: 500px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   position: relative;
@@ -48,10 +51,58 @@
   transition: background-color 0.5s ease
 }
 
-.close:hover {
-  background-color: rgb(81, 81, 115);
+.bold-24 {
+  font-weight: bold;
+  font-size: 24px;
 }
 
 .no-border-input {
+  outline: none; 
   border: 0;
+}
+
+.description-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 105px;
+}
+
+.action-button {
+  width: 49%;
+  border-radius: 12px;
+}
+
+.save-button {
+  background-color: rgb(95, 95, 135);
+  color: white;
+  border: 0;
+  height: 100%;
+}
+
+.save-button:hover {
+  background-color: rgb(66, 66, 94);
+}
+
+.close-button {
+  background-color: white;
+  border: 2px solid rgb(219, 219, 219);
+}
+
+.close-button:hover {
+  background-color: rgb(234, 234, 234);
+}
+
+.action-buttons-container {
+  height: 9%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dropdown {
+  width: 16%;
+  border: 2px solid #b5b4b4;
+  height: 7%;
+  border-radius: 7px;
+  background: #edecec;
 }
