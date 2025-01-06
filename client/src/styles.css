@@ -106,3 +106,49 @@
   border-radius: 7px;
   background: #edecec;
 }
+
+.taskboard {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.taskgroup-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.taskgroup-name {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  height: 35px;
+  padding: 0px 8px;
+  border-top: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
+}
+
+.taskgroup-addbutton {
+  width: 250px; 
+  height: 35px;
+  border: 2px dashed #ccc;
+  background: white;
+  border-radius: 6px;
+  font-size: '14px'
+}
+
+.taskgroup-body {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  width: 250px;
+  font-family: Arial, sans-serif;
+}
