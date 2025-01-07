@@ -41,6 +41,7 @@ const taskGroups: TaskCardGroupVM[] = [
 
 export function TaskBoard() {
   const [groups, setGroups] = useState<TaskCardGroupVM[]>(taskGroups)
+  const [taskIdCounter, setTaskIdCounter] = useState<number>(4);
 
   function onCardGroupChange(cardId: number, fromGroupId: number, toGroupId: number) {
     let updatedGroups = [...groups];
@@ -60,6 +61,6 @@ export function TaskBoard() {
   }
   
   return <div className="taskboard">
-    {groups.map(group => <TaskCardGroup onCardGroupChange={onCardGroupChange} group={group} groupOptions={taskGroups}/>)}
+    {groups.map(group => <TaskCardGroup taskIdCounter={taskIdCounter} setTaskIdCounter={setTaskIdCounter} onCardGroupChange={onCardGroupChange} group={group} groupOptions={taskGroups}/>)}
   </div>
 }

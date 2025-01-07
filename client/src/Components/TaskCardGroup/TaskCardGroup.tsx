@@ -4,15 +4,21 @@ import { TaskCard } from "../TaskCard/TaskCard";
 import { TaskCardVM } from "../../Models/TaskCardVM";
 import CreateCardModal from "./CreateCardModal";
 import { CreateNewTaskCardDTO } from "../../Models/CreateNewTaskCardDTO";
-import { TaskCardGroupDropdownOptions } from "../../Models/TaskCardGroupDropdownOptions";
+
+interface TaskCardGroupDropdownOptions {
+  id: number;
+  name: string;
+}
 
 export interface TaskCardGroupProps {
   group: TaskCardGroupVM;
   groupOptions: TaskCardGroupDropdownOptions[];
   onCardGroupChange;
+  taskIdCounter: number;
+  setTaskIdCounter;
 }
 
-export function TaskCardGroup({group, groupOptions, onCardGroupChange} : TaskCardGroupProps) {
+export function TaskCardGroup({group, groupOptions, onCardGroupChange, taskIdCounter, setTaskIdCounter} : TaskCardGroupProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = (card?: TaskCardVM) => {
@@ -25,12 +31,13 @@ export function TaskCardGroup({group, groupOptions, onCardGroupChange} : TaskCar
 
   const handleSaveCard = (card: CreateNewTaskCardDTO) => {
     group.tasks.push({
-      id: 0, 
+      id: taskIdCounter, 
       name: card.name, 
       description: card.description, 
       date: card.date, 
       priority: card.priority
     });
+    setTaskIdCounter((prevId) => prevId + 1);
   };
 
   return(<div className="taskgroup-body">
