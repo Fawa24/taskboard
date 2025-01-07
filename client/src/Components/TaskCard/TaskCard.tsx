@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { TaskCardVM } from "../../Models/TaskCardVM";
 import { Priority } from "../../Enums/Priority";
 
-export function TaskCard({card}: {card: TaskCardVM}) {
+interface TaskCardGroupDropdownOptions {
+  id: number;
+  name: string;
+}
+
+export interface TaskCardProps {
+  card: TaskCardVM;
+  groupOptions: TaskCardGroupDropdownOptions[];
+  currentGroupId: number;
+  onCardGroupChange;
+}
+
+export function TaskCard({card, groupOptions, currentGroupId, onCardGroupChange} : TaskCardProps) {
+  
   const options: Intl.DateTimeFormatOptions = {
     weekday: "short",
     day: "2-digit",
@@ -10,6 +23,10 @@ export function TaskCard({card}: {card: TaskCardVM}) {
   };
   
   const formattedDate = new Intl.DateTimeFormat("en-US", options).format(card.date);
+
+  function handleOptionsChange(cardId: number, fromGroupId: number, toGroupId: number): void {
+    onCardGroupChange(cardId, fromGroupId, toGroupId);
+  }
   
 return <div>
 <div style={{
@@ -61,21 +78,46 @@ return <div>
         </div>
       </div>
       <div>
-        <label htmlFor="move-to" style={{ 
-          fontSize: '0.9em', 
-          display: 'block', 
-          marginBottom: '5px' 
-        }}>Move to:</label>
-        <select id="move-to" style={{ 
-          width: '100%', 
-          padding: '5px', 
-          fontSize: '0.9em' 
-        }}>
-          <option value="">Select</option>
-          {/* Add options here */}
-        </select>
+        <GroupOption cardId={card.id} groupOptions={groupOptions} currentGroupId={currentGroupId} handleOptionsChange={handleOptionsChange} />
       </div>
     </div>
   </div>
 </div>
+}
+
+interface GroupOptionProps {
+  groupOptions: TaskCardGroupDropdownOptions[];
+  currentGroupId: number;
+  cardId: number;  
+  handleOptionsChange; 
+}
+
+function GroupOption({groupOptions, currentGroupId, handleOptionsChange, cardId}: GroupOptionProps) {
+  return(<>
+    <label htmlFor="move-to" style={{ 
+        fontSize: '0.9em', 
+        display: 'block', 
+        marginBottom: '5px' 
+    }}>Move to:</label>
+    <select id="move-to" style={{ 
+      width: '100%', 
+      padding: '5px', 
+      fontSize: '0.9em'
+    }}
+    value={currentGroupId}
+    onChange={(event) => handleOptionsChange(cardId, currentGroupId, parseInt(event.target.value, 10))}>
+      {groupOptions.map(group => 
+        <Option id={group.id} name={group.name} />
+      )}
+    </select>
+  </>)
+}
+
+interface OptionProps {
+  id: number;
+  name: string;  
+}
+
+function Option({id, name}: OptionProps) {
+  return <option key={id} value={id}>{name}</option>
 }

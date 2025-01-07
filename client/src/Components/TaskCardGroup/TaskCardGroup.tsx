@@ -4,8 +4,15 @@ import { TaskCard } from "../TaskCard/TaskCard";
 import { TaskCardVM } from "../../Models/TaskCardVM";
 import CreateCardModal from "./CreateCardModal";
 import { CreateNewTaskCardDTO } from "../../Models/CreateNewTaskCardDTO";
+import { TaskCardGroupDropdownOptions } from "../../Models/TaskCardGroupDropdownOptions";
 
-export function TaskCardGroup({group}: {group: TaskCardGroupVM}) {
+export interface TaskCardGroupProps {
+  group: TaskCardGroupVM;
+  groupOptions: TaskCardGroupDropdownOptions[];
+  onCardGroupChange;
+}
+
+export function TaskCardGroup({group, groupOptions, onCardGroupChange} : TaskCardGroupProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = (card?: TaskCardVM) => {
@@ -40,12 +47,12 @@ export function TaskCardGroup({group}: {group: TaskCardGroupVM}) {
 
     <div className="card-container">
       {group.tasks.map(x => 
-        <TaskCard card={x} />
+        <TaskCard card={x} groupOptions={groupOptions} currentGroupId={group.id} onCardGroupChange={onCardGroupChange} />
       )}
       <CreateCardModal 
-      isOpen={isModalOpen}
-      onClose={handleCloseModal}
-      onSave={handleSaveCard}/>
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onSave={handleSaveCard}/>
     </div>
   </div>);
 }
